@@ -20,7 +20,7 @@ public class Question extends BaseModel{
     private User user;
 
 
-    @ManyToMany
+    @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(
             name = "question_topics",
             joinColumns = @JoinColumn(name = "question"),
@@ -39,9 +39,5 @@ public class Question extends BaseModel{
 
     @OneToMany(mappedBy = "question")
     private List<DownVote> downVote;
-
-
-
-
 
 }

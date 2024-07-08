@@ -1,9 +1,6 @@
 package com.AskIt.EntityService.Models;
 
-import jakarta.persistence.CascadeType;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.OneToMany;
+import jakarta.persistence.*;
 import lombok.*;
 
 import java.util.List;
@@ -35,7 +32,11 @@ public class User extends BaseModel{
     @OneToMany(mappedBy = "user")
     private List<Question> answer;
 
-    @OneToMany(mappedBy = "user")
+    @ManyToMany
+    @JoinTable(
+            name = "user_topics",
+            joinColumns = @JoinColumn(name = "user"),
+            inverseJoinColumns = @JoinColumn(name = "topic"))
     private List<Topic> topics;
 
     private Boolean notifyStatus;
